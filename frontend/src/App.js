@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import { format, startOfMonth, endOfMonth, subDays } from "date-fns";
-import { DayPicker, Day } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
