@@ -1,34 +1,15 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Minimal custom styles; Tailwind handles most UI */
+.rdp-day {
+  border-radius: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Hover effects for calendar days */
+.rdp-day:hover {
+  background-color: #eef2ff;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Selected day */
+.rdp-day_selected {
+  background-color: #c7d2fe !important;
+  color: #111827 !important;
 }
