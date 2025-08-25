@@ -93,7 +93,7 @@ function App() {
     loadMoods();
     const { start, end } = defaultRanges.find((r) => r.key === rangeKey).calc();
     loadEntries(start, end);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   const onSelectDay = (day) => {
