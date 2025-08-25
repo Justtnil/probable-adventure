@@ -208,7 +208,7 @@ function App() {
               onSelect={onSelectDay}
               showOutsideDays
               className="rdp"
-              components={{ DayContent: renderDay }}
+              components={{ Day: DayContent }}
               styles={{ caption: { fontWeight: 600 }, day: { borderRadius: 8 }, head_cell: { fontWeight: 600 }, nav_button: { color: '#111827' } }}
             />
           </div>
