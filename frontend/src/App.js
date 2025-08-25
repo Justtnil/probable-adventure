@@ -5,6 +5,36 @@ import { format, startOfMonth, endOfMonth, subDays } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 
+// Simple Error Boundary to guard runtime errors in subtrees
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, info) {
+    console.error("ErrorBoundary caught: ", error, info);
+  }
+  handleReset = () => {
+    this.setState({ hasError: false, error: null });
+  };
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-4 rounded-lg border bg-rose-50 text-rose-800">
+          <div className="font-semibold mb-2">Something went wrong{this.props.componentName ? ` in ${this.props.componentName}` : ''}.</div>
+          <div className="text-sm opacity-80 mb-3">Please try again. If this persists, refresh the page.</div>
+          <button onClick={this.handleReset} className="px-3 py-2 rounded-md bg-rose-600 text-white">Try again</button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
