@@ -156,7 +156,11 @@ function App() {
     return styles;
   }, [byDate, colorMap]);
 
-  const renderDay = (day) => {
+  const DayContent = (props) => {
+    const day = props?.date instanceof Date ? props.date : new Date(props?.date);
+    if (Number.isNaN(day?.getTime())) {
+      return <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">?</div>;
+    }
     const ds = format(day, "yyyy-MM-dd");
     const entry = byDate[ds];
     return (
