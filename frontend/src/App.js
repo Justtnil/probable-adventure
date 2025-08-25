@@ -252,30 +252,32 @@ function App() {
               {byDate[dateStr] ? <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">Saved</span> : null}
             </div>
 
-            <div className="mt-3 grid grid-cols-6 gap-2">
-              {moods.map((m) => (
-                <button
-                  key={m.value}
-                  onClick={() => setSelectedMood(m.value)}
-                  className={`group flex flex-col items-center justify-center gap-1 px-2 py-2 rounded-lg border hover:shadow ${selectedMood === m.value ? 'bg-indigo-50 border-indigo-300' : 'bg-white'}`}
-                  title={m.label}
-                >
-                  <span className="text-2xl">{m.emoji}</span>
-                  <span className="text-[10px] text-gray-600">{m.label}</span>
-                </button>
-              ))}
-            </div>
+            <ErrorBoundary componentName="Mood Picker & Note">
+              <div className="mt-3 grid grid-cols-6 gap-2">
+                {moods.map((m) => (
+                  <button
+                    key={m.value}
+                    onClick={() => setSelectedMood(m.value)}
+                    className={`group flex flex-col items-center justify-center gap-1 px-2 py-2 rounded-lg border hover:shadow ${selectedMood === m.value ? 'bg-indigo-50 border-indigo-300' : 'bg-white'}`}
+                    title={m.label}
+                  >
+                    <span className="text-2xl">{m.emoji}</span>
+                    <span className="text-[10px] text-gray-600">{m.label}</span>
+                  </button>
+                ))}
+              </div>
 
-            <div className="mt-4">
-              <textarea
-                placeholder="Add a note (optional)"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                className="w-full min-h-[100px] rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
-            </div>
+              <div className="mt-4">
+                <textarea
+                  placeholder="Add a note (optional)"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  className="w-full min-h-[100px] rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                />
+              </div>
 
-            <button onClick={saveEntry} disabled={!selectedMood} className="mt-3 w-full px-4 py-2 rounded-lg bg-indigo-600 text-white font-medium shadow hover:bg-indigo-500 disabled:opacity-50">Save</button>
+              <button onClick={saveEntry} disabled={!selectedMood} className="mt-3 w-full px-4 py-2 rounded-lg bg-indigo-600 text-white font-medium shadow hover:bg-indigo-500 disabled:opacity-50">Save</button>
+            </ErrorBoundary>
           </div>
         </div>
 
