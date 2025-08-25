@@ -101,3 +101,102 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Build a mood tracker app where users record daily moods with optional notes. Include mood history with calendar or graph views, and data export option. the ui should be user friendly and use emojis for different moods"
+backend:
+  - task: "Base API up (/api root, status checks)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "low"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Base /api root and /api/status implemented and existing from template."
+  - task: "Mood config endpoints (defaults, get config, set config)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added /api/moods/defaults, /api/moods/config GET/POST with Mongo persistence and UUID safety."
+  - task: "Mood entries CRUD (create/update by date, list with date range, delete by id)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented /api/entries POST (upsert by date), GET (range), DELETE (by id). Uses UUIDs and ISO datetime."
+  - task: "PDF export of entries"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented /api/export/pdf using reportlab. Requirements updated and backend restarted successfully."
+frontend:
+  - task: "Core UI: calendar, emoji mood picker, notes, save"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Calendar via react-day-picker, mood buttons with emojis, notes textarea, save to backend."
+  - task: "Mood customization modal and save to backend"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Allows adding/editing moods and persists via /api/moods/config."
+  - task: "Export PDF trigger and download"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Calls /api/export/pdf with current range and downloads PDF."
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Mood config endpoints"
+    - "Mood entries CRUD"
+    - "PDF export endpoint"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Backend implemented with /api prefix, Mongo via MONGO_URL, UUIDs, timezone-aware datetimes. Please test backend endpoints using the external URL from frontend/.env (REACT_APP_BACKEND_URL) and appending /api. Verify create/update entry by date, listing by range, delete by id, config persistence, and that /export/pdf returns application/pdf with content."
