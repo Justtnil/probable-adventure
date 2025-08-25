@@ -232,15 +232,17 @@ function App() {
           {/* Calendar */}
           <div className="lg:col-span-2 bg-white rounded-xl shadow p-4">
             <h2 className="font-semibold text-lg mb-2">Your Month</h2>
-            <DayPicker
-              mode="single"
-              selected={selectedDate}
-              onSelect={onSelectDay}
-              showOutsideDays
-              className="rdp"
-              components={{ DayContent: DayContent }}
-              styles={{ caption: { fontWeight: 600 }, day: { borderRadius: 8 }, head_cell: { fontWeight: 600 }, nav_button: { color: '#111827' } }}
-            />
+            <ErrorBoundary componentName="Calendar">
+              <DayPicker
+                mode="single"
+                selected={selectedDate}
+                onSelect={onSelectDay}
+                showOutsideDays
+                className="rdp"
+                components={{ DayContent: DayContent }}
+                styles={{ caption: { fontWeight: 600 }, day: { borderRadius: 8 }, head_cell: { fontWeight: 600 }, nav_button: { color: '#111827' } }}
+              />
+            </ErrorBoundary>
           </div>
 
           {/* Entry panel */}
